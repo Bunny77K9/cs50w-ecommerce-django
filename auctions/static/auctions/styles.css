@@ -1,0 +1,135 @@
+:root{
+    --orange:#ffa500;
+}
+
+body {
+    padding: 7% 1rem 1rem 1rem;
+    font-family: 'Roboto Condensed', sans-serif;
+    background-color: #141414;
+    color: #fff;
+}
+
+/*\\\\\\\\\\\\\\\\ Nav Bar Contents starts \\\\\\\\\\\\\\\\\\\\\*/
+
+header{
+    position: fixed;
+    top:0; left: 0; right:0;
+    background:rgba(0, 0, 0,.75);
+    backdrop-filter: blur(3px);
+    height: 80px;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+header .logo{
+    float: left;
+    height: 60px;
+    width: auto;
+    cursor:pointer;
+    margin-left: 20px;
+    transition: .3s ease-in-out;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: -o-crisp-edges;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+    -ms-interpolation-mode: nearest-neighbor;
+}
+
+header .logo:hover{
+    transform: scale(1.1);
+}
+
+header .navbar ul li{
+    list-style:none;
+    display: inline-block;
+    padding-top: 1rem;
+    margin: 0px 20px;
+    position: relative;
+
+}
+
+header .navbar ul li  .navbarElement{
+    text-decoration: none;
+    text-transform:uppercase;
+    color: #fff;
+    font-size:15px;
+    transition: all ease-out 250ms;
+}
+
+header .navbar ul li .navbarElement:hover{
+    color: var(--orange);
+
+}
+
+header .navbar ul li::after{
+    content: '';
+    height: 3px;
+    width: 0;
+    background:#4fffe4;
+    position: absolute;
+    left:0;
+    bottom: -10px;
+    transition: 0.5s;
+}
+header .navbar ul li:hover::after{
+    width: 100%;
+}
+
+header .icons{
+    margin-right: 1rem;
+    color: #fff;
+    font-size: 14px;
+}
+
+.icon{
+    width: 30px;
+    height: auto;
+}
+
+header .icons a{
+    text-decoration: none;
+    color: #fff;
+    cursor: pointer;
+    transition: all ease-out 250ms;
+}
+
+header .icons a:hover{
+    color: var(--orange);
+    text-decoration: underline;
+}
+
+.caption{
+    display: inline;
+    margin-right: 1rem;
+}
+
+.name{
+    color: var(--orange);
+}
+
+.heading{
+    text-align: center;
+    padding:2.5rem 0
+}
+
+.heading span{
+    font-size: 3.5rem;
+    background:rgba(255, 165, 0,.2);
+    color:var(--orange);
+    border-radius: .5rem;
+    padding:.2rem 1rem;
+}
+
+.heading span.space{
+    background:none;
+}
+
+#menu-bar{
+    width:50px;
+    cursor: pointer;
+    display: none;
+}
+
+/*\\\\\\\\\\\\\\\\ Nav Bar Contents ends \\\\\\\\\\\\\\\\\\\\\*/

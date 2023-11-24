@@ -1,0 +1,51 @@
+{% extends "auctions/layout.html" %}
+{% block body %}
+<h1>WatchList</h1>
+<ul>
+    {% for listing in listings %} 
+        <div class="listing-container">
+            <table>
+                <tbody>
+                    <tr>
+                        <td style="width:40px;">
+                            <img src="{{ listing.img_url }}" style="width:80%;"/>
+                        </td>
+                        <td style="width: 60%;"  valign="top">
+                            {% if listing.sold %}
+                                <h3><a href="{% url 'close_bidding' listing.id %}" >{{ listing.title }}</a></h3>
+                                <div>Bidding Closed!</div>
+                            {% else %}
+                                <h3><a href="{% url 'listing' listing.id %}" >{{ listing.title }}</a></h3>
+                                <div>Last Bid: ${{ listing.price }}</div>
+                            {% endif %}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    {% empty %}
+        <li>Nothing in your WatchList</li>
+    {% endfor %}
+</ul>
+<style>
+    h1{
+        text-align: center;
+        padding-top: 1rem;
+    }
+    ul{
+        list-style-type:none;
+    }
+    .listing-container {
+        background: rgba(0, 0, 0, 0.3);
+        backdrop-filter: blur(13px);
+        box-shadow: 0 0 20px -2px #aaa;
+        margin: 50px;
+        padding: 20px;
+        border-radius: 10px;
+    }
+    table{
+        width: 100%;
+    }
+
+</style>
+{% endblock %}

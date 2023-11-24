@@ -1,0 +1,92 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>{% block title %}AUCTION{% endblock %}</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'auctions/favicon.png' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap" rel="stylesheet">
+
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <link href="{% static 'auctions/styles.css' %}" rel="stylesheet">
+    <link href="{% static 'auctions/login.css' %}" rel="stylesheet">
+</head>
+
+<body>
+    <!-- header section starts  -->
+
+    <header>
+
+        <img src="" id="menu-bar" alt="menu icon">
+
+        <a href="{% url 'index' %}"><img src="{% static 'auctions/auc.png' %}" class="logo" alt="logo"></a>
+
+        <nav class="navbar">
+            <ul>
+                <li><a href="{% url 'index' %}" class="navbarElement">Active Listings</a></li>
+                <li><a href="{% url 'categories' %}" class="navbarElement">Categories</a></li>
+                {% if user.is_authenticated %}
+                <li><a href="{% url 'create_listing' %}" class="navbarElement">Create Listing</a></li>
+                <li><a href="{% url 'watchlist' user.id %}" class="navbarElement">WatchList</a></li>
+                {% else %}
+                <li><a href="{% url 'register' %}" class="navbarElement">Register</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+
+        <div class="icons">
+            {% if user.is_authenticated %}
+            <p class="caption">Hi, <strong class="name">{{ user.username.capitalize }}!</strong></p>
+            <a href="{% url 'logout' %}" class="caption">Log Out</a>
+            {% else %}
+            <a href="{% url 'login' %}" class="caption">Log In</a>
+            {% endif %}
+            <img src="{% static 'auctions/user.png' %}" class="icon" id="login-btn" alt="login icon">
+        </div>
+    </header>
+
+    <!-- header section ends -->
+    <!-- <div>
+            {% if user.is_authenticated %}
+                Signed in as <strong>{{ user.username }}</strong>.
+            {% else %}
+                Not signed in.
+            {% endif %}
+        </div>
+        <ul class="nav">
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'index' %}">Active Listings</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'categories' %}">Categories</a>
+            </li>
+            {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'create_listing' %}">Create Listing</a>
+                 </li>
+                 <li class="nav-item">
+                    <a class="nav-link" href="{% url 'watchlist' user.id %}">WatchList</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
+                </li>
+            {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'login' %}">Log In</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'register' %}">Register</a>
+                </li>
+            {% endif %}
+        </ul> -->
+
+    {% block body %}
+    {% endblock %}
+</body>
+
+</html>

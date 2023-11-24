@@ -1,0 +1,64 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+
+<img class='background-img' src="https://dixit-audio.fr/wp-content/uploads/2020/09/3550399-scaled.jpg" />
+<div class='card-wrapper'>
+    <h1 class='call-to-action'>Login</h1>
+    {% if message %}
+        <div class="message">{{ message }}</div>
+    {% endif %}
+    <form action="{% url 'login' %}" method="post">
+        {% csrf_token %}
+        <div class='field'>
+            <label for='username'>Username</label><br>
+            <i class='bx bx-user'></i>
+            <input required type='text' id='username' name='username' placeholder='Type your username' , spellcheck='false' />
+        </div>
+        <div class='field'>
+            <label for='pwd' name='pwd'>Password</label><br>
+            <i class='bx bx-lock-alt'></i>
+            <input required type='password' id='pwd' name='password' placeholder='Type your password' />
+        </div>
+        <a href=''><span>Forgot password?</span></a>
+        <input type='submit' id='login-button' value="Log in" />
+    </form>
+
+    <div class='SignUp'>
+        Haven't registered yet? <a href="{% url 'register' %}">Create an Account.</a>
+    </div>
+</div>
+<!-- <h2>Login</h2>
+
+    {% if message %}
+        <div>{{ message }}</div>
+    {% endif %}
+
+    <form action="{% url 'login' %}" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <input autofocus class="form-control" type="text" name="username" placeholder="Username">
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="password" name="password" placeholder="Password">
+        </div>
+        <input class="btn btn-primary" type="submit" value="Login">
+    </form>
+
+    Don't have an account? <a href="{% url 'register' %}">Register here.</a> -->
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+    
+        body {
+            padding: 0%;
+        }
+    
+    </style>
+
+
+{% endblock %}

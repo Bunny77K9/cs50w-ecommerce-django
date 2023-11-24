@@ -1,0 +1,244 @@
+{% extends "auctions/layout.html" %}
+{% block body %}
+<h1>List by Catagory</h1>
+<form action="{% url 'categories' %}" method="post">
+    {% csrf_token %}
+    <select required name="categories">
+        <option value="" disabled selected>Select Catagory</option>
+        {% for category in categories %}
+        <option value="{{ category.id }}">{{ category }}</option>
+        {% endfor %}
+    </select>
+    <input type="submit" class="btn btn-primary" value="Search">
+</form>
+<br>
+<h2>{{ category }}</h2>
+<ul>
+    {% for listing in listings %}
+    <div class="listing-container">
+        <table>
+            <tbody>
+                <tr>
+                    <td style="width:40px;">
+                        <img src="{{ listing.img_url }}" style="width:80%;" />
+                    </td>
+                    <td style="width: 60%;" valign="top">
+                        <h4><a href="{% url 'listing' listing.id %}">{{ listing.title }}</a></h4>
+                        <br>
+                        <div>{{ listing.description }}</div>
+                        <br>
+                        <div>Last Bid: ${{ listing.price }}</div>
+                        <br>
+                        <div>Listed by: {{ listing.user.username.capitalize }}</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    {% empty %}
+    {% if category != "" %}
+    <li class="no-listing">No listings in this category</li>
+    {% else %}
+    <div class="work in-grid">
+
+        <a href="" target="_blank" class="work-item"
+            style="background-image: url('https://images.unsplash.com/photo-1547826039-bfc35e0f1ea8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=772&q=80');">
+            <div class="work-item-desc">
+                <h3>Art</h3>
+            </div>
+            <!--work item description ends-->
+        </a>
+        <!--work item ends-->
+
+        <a href="" target="_blank" class="work-item" target="_blank" class="work-item"
+            style="background-image: url('https://images.unsplash.com/photo-1562408590-e32931084e23?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80');">
+            <div class="work-item-desc">
+                <h3>Consumer Electronics</h3>
+            </div>
+            <!--work item description ends-->
+        </a>
+        <!--work item ends-->
+
+        <a href="" target="_blank" class="work-item" target="_blank" class="work-item"
+            style="background-image: url('https://images.unsplash.com/photo-1544441893-675973e31985?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80');">
+            <div class="work-item-desc">
+                <h3>Clothing, Shoes and Accessories</h3>
+            </div>
+            <!--work item description ends-->
+        </a>
+        <!--work item ends-->
+
+        <a href="" target="_blank" class="work-item" target="_blank" class="work-item"
+            style="background-image: url('https://images.unsplash.com/photo-1511688878353-3a2f5be94cd7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80');">
+            <div class="work-item-desc">
+                <h3>Health and Beauty</h3>
+            </div>
+            <!--work item description ends-->
+        </a>
+        <!--work item ends-->
+
+        <a href="" target="_blank" class="work-item" target="_blank" class="work-item"
+            style="background-image: url('https://images.unsplash.com/photo-1573201106611-1de49dfada5d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80');">
+            <div class="work-item-desc">
+                <h3>Home and Garden</h3>
+            </div>
+            <!--work item description ends-->
+        </a>
+        <!--work item ends-->
+
+        <a href="" target="_blank" class="work-item"
+            style="background-image: url('https://images.unsplash.com/photo-1589512574123-2ba3b33bf066?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80');">
+            <div class="work-item-desc">
+                <h3>Jewelry and Watches</h3>
+            </div>
+            <!--work item description ends-->
+        </a>
+        <!--work item ends-->
+
+        <a href="" class="work-item"
+            style="background-image: url('https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80');">
+            <div class="work-item-desc">
+                <h3 class='title'>Music</h3>
+            </div>
+            <!--work item description ends-->
+        </a>
+        <!--work item ends-->
+
+        <a href="" target="_blank" class="work-item" target="_blank" class="work-item"
+            style="background-image: url('https://images.unsplash.com/photo-1599280174407-fdc3e8c47856?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=868&q=80');">
+            <div class="work-item-desc">
+                <h3>Sporting Goods</h3>
+            </div>
+            <!--work item description ends-->
+        </a>
+        <!--work item ends-->
+
+    </div>
+    <!--work ends-->
+    {% endif %}
+    {% endfor %}
+</ul>
+<style>
+    h1 {
+        text-align: center;
+        padding: 1rem;
+    }
+
+    h2 {
+        margin-left: 3.5rem;
+    }
+
+    .no-listing{
+        text-align: center;
+        margin-right: 2.5rem;
+    }
+
+    select {
+        background-color: rgba(255, 255, 255, 0.1);
+        width: 87%;
+        color: #fff;
+        border: none;
+        padding: 7px;
+        margin-left: 3.5rem;
+        border-bottom: 3px solid #ccc;
+        transition: all 0.3s ease;
+    }
+
+    select:focus {
+        outline: none;
+        border-color: var(--orange);
+        color: var(--orange);
+    }
+
+    select option {
+        color: #000;
+        background-color: white;
+    }
+
+    ul {
+        list-style-type: none;
+    }
+
+    .listing-container {
+        background: rgba(0, 0, 0, 0.3);
+        backdrop-filter: blur(13px);
+        box-shadow: 0 0 20px -2px #aaa;
+        margin: 50px;
+        padding: 20px;
+        border-radius: 10px;
+    }
+
+    table {
+        width: 100%;
+    }
+
+    .work in-grid {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+
+    .work {
+        font-family: sans-serif;
+        font-size: 20px;
+        margin: 0;
+        padding: 0;
+    }
+
+    .work-item {
+        background-size: cover;
+        background-position: center;
+        transition: all 0.3s;
+        display: block;
+        text-decoration: none;
+    }
+
+    .work-item-desc {
+        width: 100%;
+        height: 100%;
+        background-color: transparent;
+    }
+
+    h3 {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        color: #fff;
+        z-index: -1;
+        font-size: 18px;
+    }
+
+
+    /*desktop*/
+
+    @media screen and (min-width: 775px) {
+        .work {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .work-item {
+            width: 10%;
+            height: 340px;
+            margin: 1.1%;
+            position: relative;
+            overflow: hidden;
+            transition: all ease-out 250ms;
+        }
+
+        .work-item-desc:hover {
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(5px);
+        }
+
+        .work-item:hover {
+            transform: scale(1.05);
+        }
+    }
+</style>
+{% endblock %}

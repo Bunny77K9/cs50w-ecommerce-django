@@ -1,0 +1,130 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+
+{% if user.is_authenticated %}
+<table style="width: 100%;">
+    <tbody>
+        <tr>
+            <td style="width:40px;">
+                <img src="{{ listing.img_url }}" style="width:90%;" />
+            </td>
+            <td style="width: 60%;">
+
+                <h3 class="listing-element">{{ listing.title }}</h3>
+                <div class="listing-element">{{ listing.description }}</div>
+
+                {% if is_winner == True %}
+                    <h5 class="listing-element">Congratulations, you are the winner!</h5>
+                {% elif is_winner == False %}
+                    <h5 class="listing-element">Bidding is closed</h5>
+                {% else %}
+
+                    <form action="{% url 'bidding' listing.id %}" method="post">
+                        {% csrf_token %}
+                        <div class="listing-element">
+                            Bid: $ 
+                            <input class="bidding-input" type="number" min="{{ listing.price }}" step="0.01" name="bid" placeholder="{{ listing.price }}">
+                            <input type="submit" class="btn btn-primary" value="Place">
+                        </div>
+                    </form>
+                    <div  class="listing-element">Category: {{ category }}</div>
+                    <div  class="listing-element">Listed by: {{ listing.user.username.capitalize }}</div>
+
+                    {% if watching %}
+                        <a href="{% url 'remove_watchlist' listing.id %}"  class="listing-element"> Remove from WatchList</a>
+                    {% else %}
+                        <a href="{% url 'add_watchlist' listing.id %}"  class="listing-element"> Add to WatchList</a>
+                    {% endif %}
+
+                    {% if landlord %}
+                        <a href="{% url 'close_bidding' listing.id %}"  class="listing-element">Close bidding</a>
+                    {% else %}
+                    {% endif %}
+
+                {% endif %}
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<hr color="#ccc">
+
+<form action="{% url 'listing' listing.id %}" method="post">
+    {% csrf_token %}
+    <h6>Add comment</h6>
+    <i class='bx bx-message-square-dots' style="font-size: 40px;"></i>
+    <input type="text" class="comment-textarea" name="comment" placeholder="Type your comment here.">
+    <br>
+    <input type="submit" class="btn btn-primary comment-button">
+</form>
+<h6>Comments:</h6>
+<ul style="list-style-type: none; padding-top: 1rem;">
+
+    {% for comment in comments %}
+    <div class="comments-text">
+        <li>{{ comment }}</li>
+    </div>
+    {% empty %}
+    <li>Be First to add a comment</li>
+    {% endfor %}
+</ul>
+
+{% else %}
+<h6>Please login or create an account</h6>
+{% endif %}
+
+<style>
+    .comment-textarea {
+        vertical-align: top;
+        background-color: rgba(255, 255, 255, 0.1);
+        border: none;
+        border-radius: 0px;
+        color: #fff;
+        border-bottom: 3px solid #ccc;
+        width: 96.5%;
+        padding: 5px;
+    }
+
+    .comment-textarea:focus {
+        outline: none;
+        color: #fff;
+        border-color: var(--orange);
+        background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .comment-button {
+        position: relative;
+        display: inline-block;
+        margin-top: 10px;
+        left: 94.6%;
+    }
+
+    .comments-text{
+        border: 1px solid lightgray; 
+        margin: 10px; padding: 10px; 
+        border-radius: 10px; 
+        width: 95%;
+    }
+
+    .listing-element{
+        padding: 1rem;
+    }
+    .bidding-input{
+        background-color: rgba(255, 255, 255, 0.1);
+        border: none;
+        border-radius: 0px;
+        padding: 5px;
+        color: #fff;
+        border-bottom: 3px solid #ccc;
+    }
+
+    .bidding-input:focus {
+        outline: none;
+        color: #fff;
+        border-color: var(--orange);
+        background-color: rgba(255, 255, 255, 0.1);
+    }
+</style>
+
+{% endblock %}
